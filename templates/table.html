@@ -1,0 +1,102 @@
+{% extends "baseTemplates/baseForm.html"%}
+
+{% block title %}Ergebnis{% endblock %}
+
+{% block main %}
+
+<div class="container">
+    <!-- Nav Bar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="start">Neuer Job</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ ('Indeed') }}">Indeed</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ ('Monster') }}">Monster</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ ('LinkedIn') }}">LinkedIn</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ ('Stepstone') }}">Stepstone</a>
+                    </li>
+                </ul>
+                <a href="/analytics">
+                    <button class="btn btn-outline-success" type="button">Analyse</button>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Table -->
+    <table class="table table-bordered">
+        <thead">
+            <th scope="col" style="text-align: center;">ID</th>
+            <th scope="col" style="text-align: center;">URL</th>
+            <th scope="col" style="text-align: center;">Job</th>
+            <th scope="col" style="text-align: center;">Stadt</th>
+            <th scope="col" style="text-align: center;">Radius</th>
+            <th scope="col" style="text-align: center;">Content</th>
+            <th scope="col" style="text-align: center;">Date</th>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr style="height: 5%">
+                    <td>{{row["jobID"]}}</td>
+                    <td>{{row["url"]}}</td>
+                    <td>{{row["job"]}}</td>
+                    <td>{{row["city"]}}</td>
+                    <td>{{row["radius"]}}</td>
+                    <td>{{row["content"]}}</td>
+                    <td>{{row["date"]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+    </table>
+</div>
+<button
+        type="button"
+        class="btn btn-danger btn-floating btn-lg"
+        id="btn-back-to-top"
+        style="position: fixed; bottom: 20px; right: 20px; display: none;">
+        To the Top
+</button>
+
+<style>
+    td{
+        height: 5%;
+    }
+</style>
+
+<script>
+    let mybutton = document.getElementById("btn-back-to-top");
+    window.onscroll = function () {
+        scrollFunction();
+    };
+
+    function scrollFunction() {
+        if (
+            document.body.scrollTop > 20 ||
+            document.documentElement.scrollTop > 20
+        ) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    mybutton.addEventListener("click", backToTop);
+    function backToTop() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+</script>
+{% endblock %}

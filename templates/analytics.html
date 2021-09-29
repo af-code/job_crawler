@@ -1,0 +1,109 @@
+{% extends "baseTemplates/baseForm.html"%}
+
+{% block title %}Analyse{% endblock %}
+
+{% block main %}
+<script>
+    function enforceMinMax(el) {
+        if (el.value != "") {
+            if (parseInt(el.value) < parseInt(el.min)) {
+                el.value = el.min;
+            }
+            if (parseInt(el.value) > parseInt(el.max)) {
+                el.value = el.max;
+            }
+        }
+    }
+</script>
+<div class="container">
+    <form method="POST">
+        <p class="text-center fs-4">
+            Nach welchen Parametern soll analysiert werden?
+        </p>
+        <div class="form-group">
+            <label class="text-danger">Jobbezeichnung</label>
+            <input class="form-control" type="text" name="job">
+        </div>
+        <div class="form-group">
+            <label>Stadt</label>
+            <input class="form-control" type="text" name="city">
+        </div>
+        <div class="form-group">
+            <label>Radius</label>
+            <input class="form-control" type="number" name="radius">
+        </div>
+        <hr>
+        <p class="text-center fs-4">
+            End - und Startdatum eingeben, wenn gewollt!
+        </p>
+        <hr>
+
+        <div class="row">
+            <div class="col-1">
+                <span>Von:</span>
+            </div>
+            <div class="col">
+                <input type="number" class="form-control" name="startDay" onkeyup="{enforceMinMax(this)}" value="1"
+                    placeholder="Tag" min="1" max="31">
+            </div>
+            <div class="col">
+                <input type="number" class="form-control" name="startMonth" onkeyup="{enforceMinMax(this)}" value="1"
+                    placeholder="Monat" min="1" max="12">
+            </div>
+            <div class="col">
+                <input type="number" class="form-control" name="startYear" onkeyup="{enforceMinMax(this)}" value="2010"
+                    placeholder="Jahr" min="2010" max="2099">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <span>Bis:</span>
+            </div>
+            <div class="col">
+                <input type="number" class="form-control" name="endDay" onkeyup="{enforceMinMax(this)}" value="31"
+                    placeholder="Tag" min="1" max="31">
+            </div>
+            <div class="col">
+                <input type="number" class="form-control" name="endMonth" onkeyup="{enforceMinMax(this)}" value="12"
+                    placeholder="Monat" min="1" max="12">
+            </div>
+            <div class="col">
+                <input type="number" class="form-control" name="endYear" onkeyup="{enforceMinMax(this)}" value="2099"
+                    placeholder="Jahr" min="2010" max="2099">
+            </div>
+        </div>
+
+        <hr>
+        <p class="text-center fs-4">
+            Wählen Sie aus, von welchen Internetseite aus der Datenbank Daten analysiert werden sollen!
+        </p>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="switchIndeed" name="switchIndeed"
+                style="display: inline-block" checked>
+            <label class="form-check-label" for="switchIndeed">indeed</label>
+        </div>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="switchMonster" name="switchMonster"
+                style="display: inline-block" disabled="true">
+            <label class="form-check-label" for="switchMonster">Monster</label>
+        </div>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="switchLinkedin" name="switchLinkedIn"
+                style="display: inline-block" checked>
+            <label class="form-check-label" for="switchLinkedin">LinkedIn</label>
+        </div>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="switchStepStone" name="switchStepStone"
+                style="display: inline-block" checked>
+            <label class="form-check-label" for="switchStepStone">Stepstone</label>
+        </div>
+        <hr>
+            <button type="submit" class="btn btn-primary" name="analyze" value="analyze">Analysieren</button>
+            <a href="/">
+                <button class="btn btn-outline-success" type="button">Zurück zur Tabelle</button>
+            </a>
+        </div>
+        
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,6 @@
+python=3.9.1
+beautifulsoup4=4.9.3
+spacy=3.1.2
+de-core-news-lg=3.1.0
+requests=2.25.0
+Flask=1.1.2
